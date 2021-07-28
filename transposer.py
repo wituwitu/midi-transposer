@@ -1,8 +1,30 @@
-from mido import MidiFile
+from mido import MidiFile, MidiTrack, Message
 
-mid = MidiFile('midibateria.mid')
+from utils import ad2_to_gm
+
+mid = MidiFile('bataka.mid')
+
+outfile = MidiFile()
+meta_track = MidiTrack()
+out_track = MidiTrack()
+outfile.tracks.append(meta_track)
+outfile.tracks.append(out_track)
 
 for i, track in enumerate(mid.tracks):
     print(f'Track {i}: {track.name}')
     for msg in track:
-        print(msg)
+        if i == 0:
+            print(msg)
+            meta_track.append(msg)
+        else:
+            if msg.is_meta:
+                out_track.append(msg)
+                print(msg)
+            else:
+                out_track.append(Message(type=msg.type,
+                                         channel=9,
+                                         note=ad2_to_gm(msg.note),
+                                         velocity=msg.velocity,
+                                         time=msg.time*20))     # Why 20 XD
+
+outfile.save('result.mid')
