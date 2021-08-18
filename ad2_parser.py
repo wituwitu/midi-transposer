@@ -9,13 +9,13 @@ with open("wytus.AD2Map", 'r') as f:
             val = int(line[18:-3])
             ad2_parsed[key] = val
 
-with open("ad2_map.json", 'r') as f:
+with open("maps/ad2_map.json", 'r') as f:
     ad2_map = json.load(f)
 
-with open("ad2_to_gm.json", 'r') as f:
+with open("maps/ad2_to_gm.json", 'r') as f:
     ad2_to_gm = json.load(f)
 
-with open("gm_map.json", 'r') as f:
+with open("maps/gm_map.json", 'r') as f:
     gm_map = json.load(f)
 
 for key in ad2_parsed.keys():
@@ -28,5 +28,5 @@ for key in ad2_parsed.keys():
         except KeyError:
             ad2_parsed[key] = 0
 
-with open("ad2_parsed.json", 'w') as f:
+with open("maps/ad2_parsed.json", 'w') as f:
     json.dump(ad2_parsed, f, indent=2)

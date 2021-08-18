@@ -13,6 +13,6 @@ def read_messages(filename):
 
 
 def ad2_to_gm(note):
-    with open("ad2_parsed.json") as f:
+    with open("maps/ad2_parsed.json") as f:
         ad2_parsed = json.load(f)
     return ad2_parsed[str(note)]
