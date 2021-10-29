@@ -1,8 +1,14 @@
+import sys
+
 from mido import MidiFile, MidiTrack, Message
 
 from utils import ad2_to_gm
 
-mid = MidiFile('bataka.mid')
+if len(sys.argv) < 1:
+    print("Usage: py transposer.py filename")
+
+filename = sys.argv[1]
+mid = MidiFile(filename)
 
 outfile = MidiFile()
 meta_track = MidiTrack()
